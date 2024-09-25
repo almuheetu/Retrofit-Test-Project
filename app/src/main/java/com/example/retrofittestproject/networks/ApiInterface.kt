@@ -1,10 +1,11 @@
 package com.example.retrofittestproject.networks
 
-object ApiClient {
-    fun getInstance(): Retrofit {
-        return Retrofit.Builder()
-            .baseUrl(Constants.BASE_URL)
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-    }
+import com.example.retrofittestproject.model.DivisionResponse
+import retrofit2.Response
+
+import retrofit2.http.GET
+
+interface ApiInterface {
+    @GET("division.json")
+    suspend fun getDivision(): Response<DivisionResponse>
 }
