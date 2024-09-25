@@ -1,30 +1,36 @@
 package com.example.retrofittestproject
 
-import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
-import android.view.View
+import androidx.recyclerview.widget.RecyclerView
 import android.view.ViewGroup
-import android.widget.TextView
 
-import com.example.retrofittestproject.placeholder.PlaceholderContent.PlaceholderItem
 import com.example.retrofittestproject.databinding.AdapterThanaBinding
+import com.example.retrofittestproject.model.Thana
 
 
 class ThanaAdapter(
-    private val values: List<PlaceholderItem>
+    private val thanaList: List<Thana>,
 ) : RecyclerView.Adapter<ThanaAdapter.ViewHolder>() {
+    class ViewHolder(var binding: AdapterThanaBinding) : RecyclerView.ViewHolder(binding.root)
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+    override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
+        val binding = AdapterThanaBinding.inflate(
+            LayoutInflater.from(viewGroup.context),
+            viewGroup,
+            false
+        )
+        return ViewHolder(binding)
+    }
 
+    override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
+        val thana = thanaList[position]
+        viewHolder.binding.tvThanaName.text = thana.name
 
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val item = values[position]
+    override fun getItemCount(): Int {
+        return thanaList.size
 
     }
-
-    override fun getItemCount(): Int
-
 
 }
