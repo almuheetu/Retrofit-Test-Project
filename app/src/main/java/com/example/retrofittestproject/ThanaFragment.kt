@@ -31,7 +31,7 @@ class ThanaFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val allDistrict = args.data
-        val districtId = allDistrict.id
+        val thana = allDistrict.thanas
 
         val recyclerView: RecyclerView = binding.thanaRecyclerView
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
@@ -40,10 +40,7 @@ class ThanaFragment : Fragment() {
         viewModel.getDivision()
         viewModel.items.observe(viewLifecycleOwner) {
             it?.let {
-                Log.d("Log404", "Division Response : ${it.toString()}")
-                val allThana = it
-                val filteredThana = allThana.filter { it.id == districtId }
-                thanaAdapter = ThanaAdapter(filteredThana[0].districts[0].thanas)
+                thanaAdapter = ThanaAdapter(thana)
                 recyclerView.adapter = thanaAdapter
             }
         }
