@@ -19,13 +19,20 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        viewModel = DivisionViewModel(DivisionRepository())
-        viewModel.getDivision()
-
-        viewModel.items.observe(this) {
-            it?.let {
-                Log.d("Log404", "Division Response Item : ${it.toString()}")
-            }
+        if (savedInstanceState == null) {
+            val divisionFragment = DivisionFragment()
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container, divisionFragment)
+                .commit()
         }
+
+//        viewModel = DivisionViewModel(DivisionRepository())
+//        viewModel.getDivision()
+//
+//        viewModel.items.observe(this) {
+//            it?.let {
+//                Log.d("Log404", "Division Response Item : ${it.toString()}")
+//            }
+//        }
     }
 }
