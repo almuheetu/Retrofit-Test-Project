@@ -19,20 +19,13 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        if (savedInstanceState == null) {
-            val thanaFragment = ThanaFragment()
-            supportFragmentManager.beginTransaction()
-                .replace(R.id.thana_fragment_container, thanaFragment)
-                .commit()
-        }
-
-//        viewModel = DivisionViewModel(DivisionRepository())
-//        viewModel.getDivision()
-//
-//        viewModel.items.observe(this) {
-//            it?.let {
-//                Log.d("Log404", "Division Response Item : ${it.toString()}")
-//            }
+//        if (savedInstanceState == null) {
+//            val thanaFragment = ThanaFragment()
+//            supportFragmentManager.beginTransaction()
+//                .replace(R.id.thana_fragment_container, thanaFragment)
+//                .commit()
 //        }
+
+
     }
 }

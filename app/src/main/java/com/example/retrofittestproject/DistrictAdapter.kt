@@ -12,16 +12,22 @@ class DistrictAdapter(
     private val divisionList: List<District>,
 ) : RecyclerView.Adapter<DistrictAdapter.ViewHolder>() {
     class ViewHolder(var binding: AdapterDistrictBinding) : RecyclerView.ViewHolder(binding.root)
-
+    companion object{
+        var listener: ItemClickListener? = null
+    }
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
-        val binding = AdapterDistrictBinding.inflate(LayoutInflater.from(viewGroup.context), viewGroup, false)
+        val binding =
+            AdapterDistrictBinding.inflate(LayoutInflater.from(viewGroup.context), viewGroup, false)
         return ViewHolder(binding)
     }
 
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
         val division = divisionList[position]
         viewHolder.binding.tvDistrictName.text = division.name
+        viewHolder.itemView.setOnClickListener {
+            listener?.onItemClick(division)
+        }
     }
 
     override fun getItemCount(): Int {
@@ -29,6 +35,10 @@ class DistrictAdapter(
 
     }
 
+
+    interface ItemClickListener {
+        fun onItemClick(district: District)
+    }
 
 
 }

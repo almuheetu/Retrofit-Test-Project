@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/divisionFragment">
+
+    <fragment
+        android:id="@+id/divisionFragment"
+        android:name="com.example.retrofittestproject.DivisionFragment"
+        android:label="fragment_division_list"
+        tools:layout="@layout/fragment_division_list" >
+        <action
+            android:id="@+id/action_divisionFragment_to_districtFragment"
+            app:destination="@id/districtFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/districtFragment"
+        android:name="com.example.retrofittestproject.DistrictFragment"
+        android:label="fragment_district_list"
+        tools:layout="@layout/fragment_district_list" >
+        <argument
+            android:name="data"
+            app:argType="com.example.retrofittestproject.model.DivisionResponseItem" />
+        <action
+            android:id="@+id/action_districtFragment_to_thanaFragment"
+            app:destination="@id/thanaFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/thanaFragment"
+        android:name="com.example.retrofittestproject.ThanaFragment"
+        android:label="fragment_thana_list"
+        tools:layout="@layout/fragment_thana_list" >
+        <argument
+            android:name="data"
+            app:argType="com.example.retrofittestproject.model.District" />
+    </fragment>
+</navigation>

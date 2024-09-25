@@ -9,12 +9,14 @@ import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import com.example.retrofittestproject.databinding.FragmentDivisionListBinding
+import com.example.retrofittestproject.model.DivisionResponseItem
 import com.example.retrofittestproject.placeholder.PlaceholderContent
 import com.example.retrofittestproject.reposatories.DivisionRepository
 import com.example.retrofittestproject.viewModel.DivisionViewModel
 
-class DivisionFragment : Fragment() {
+class DivisionFragment : Fragment(), DivisionAdapter.ItemClickListener {
     private lateinit var binding: FragmentDivisionListBinding
     private lateinit var divisionAdapter: DivisionAdapter
     private lateinit var viewModel: DivisionViewModel
@@ -29,9 +31,9 @@ class DivisionFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         val recyclerView: RecyclerView = binding.divisionRecyclerView
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
+        DivisionAdapter.listener = this
         viewModel = DivisionViewModel(DivisionRepository())
         viewModel.getDivision()
         viewModel.items.observe(viewLifecycleOwner) {
@@ -42,5 +44,11 @@ class DivisionFragment : Fragment() {
             }
 
         }
+    }
+
+    override fun onItemClick(division: DivisionResponseItem) {
+        val action = DivisionFragmentDirections.actionDivisionFragmentToDistrictFragment(division)
+        findNavController().navigate(action)
+
     }
 }

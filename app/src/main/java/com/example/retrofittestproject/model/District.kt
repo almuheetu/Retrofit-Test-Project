@@ -1,6 +1,7 @@
 package com.example.retrofittestproject.model
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 data class District(
     @SerializedName("division_id")
@@ -11,4 +12,4 @@ data class District(
     val name: String,
     @SerializedName("thanas")
     val thanas: List<Thana>
-)
+): Serializable

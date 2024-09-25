@@ -26,6 +26,7 @@ class ThanaAdapter(
         val thana = thanaList[position]
         viewHolder.binding.tvThanaName.text = thana.name
 
+
     }
 
     override fun getItemCount(): Int {
