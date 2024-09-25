@@ -20,9 +20,9 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         if (savedInstanceState == null) {
-            val divisionFragment = DivisionFragment()
+            val districtFragment = DistrictFragment()
             supportFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container, divisionFragment)
+                .replace(R.id.district_fragment_container, districtFragment)
                 .commit()
         }
 

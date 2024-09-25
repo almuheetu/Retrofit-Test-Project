@@ -1,50 +1,34 @@
 package com.example.retrofittestproject
 
-import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
-import android.view.View
+import androidx.recyclerview.widget.RecyclerView
 import android.view.ViewGroup
-import android.widget.TextView
 
-import com.example.retrofittestproject.placeholder.PlaceholderContent.PlaceholderItem
 import com.example.retrofittestproject.databinding.AdapterDistrictBinding
+import com.example.retrofittestproject.model.District
 
-/**
- * [RecyclerView.Adapter] that can display a [PlaceholderItem].
- * TODO: Replace the implementation with code for your data type.
- */
+
 class DistrictAdapter(
-    private val values: List<PlaceholderItem>
+    private val divisionList: List<District>,
 ) : RecyclerView.Adapter<DistrictAdapter.ViewHolder>() {
+    class ViewHolder(var binding: AdapterDistrictBinding) : RecyclerView.ViewHolder(binding.root)
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
 
-        return ViewHolder(
-            AdapterDistrictBinding.inflate(
-                LayoutInflater.from(parent.context),
-                parent,
-                false
-            )
-        )
+    override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
+        val binding = AdapterDistrictBinding.inflate(LayoutInflater.from(viewGroup.context), viewGroup, false)
+        return ViewHolder(binding)
+    }
+
+    override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
+        val division = divisionList[position]
+        viewHolder.binding.tvDistrictName.text = division.name
+    }
+
+    override fun getItemCount(): Int {
+        return divisionList.size
 
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val item = values[position]
-        holder.idView.text = item.id
-        holder.contentView.text = item.content
-    }
 
-    override fun getItemCount(): Int = values.size
-
-    inner class ViewHolder(binding: AdapterDistrictBinding) :
-        RecyclerView.ViewHolder(binding.root) {
-        val idView: TextView = binding.itemNumber
-        val contentView: TextView = binding.content
-
-        override fun toString(): String {
-            return super.toString() + " '" + contentView.text + "'"
-        }
-    }
 
 }

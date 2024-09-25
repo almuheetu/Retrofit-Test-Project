@@ -1,6 +1,7 @@
 package com.example.retrofittestproject
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -8,54 +9,40 @@ import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.example.retrofittestproject.databinding.FragmentDistrictListBinding
+import com.example.retrofittestproject.databinding.FragmentDivisionListBinding
 import com.example.retrofittestproject.placeholder.PlaceholderContent
+import com.example.retrofittestproject.reposatories.DivisionRepository
+import com.example.retrofittestproject.viewModel.DivisionViewModel
 
-/**
- * A fragment representing a list of Items.
- */
 class DistrictFragment : Fragment() {
+    private lateinit var binding: FragmentDistrictListBinding
+    private lateinit var districtAdapter: DistrictAdapter
+    private lateinit var viewModel: DivisionViewModel
 
-    private var columnCount = 1
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        arguments?.let {
-            columnCount = it.getInt(ARG_COLUMN_COUNT)
-        }
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        val view = inflater.inflate(R.layout.fragment_district_list, container, false)
-
-        // Set the adapter
-        if (view is RecyclerView) {
-            with(view) {
-                layoutManager = when {
-                    columnCount <= 1 -> LinearLayoutManager(context)
-                    else -> GridLayoutManager(context, columnCount)
-                }
-                adapter = DistrictAdapter(PlaceholderContent.ITEMS)
-            }
-        }
-        return view
+    ): View {
+        binding = FragmentDistrictListBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
-    companion object {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-        // TODO: Customize parameter argument names
-        const val ARG_COLUMN_COUNT = "column-count"
+        val recyclerView: RecyclerView = binding.districtRecyclerView
+        recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
-        // TODO: Customize parameter initialization
-        @JvmStatic
-        fun newInstance(columnCount: Int) =
-            DistrictFragment().apply {
-                arguments = Bundle().apply {
-                    putInt(ARG_COLUMN_COUNT, columnCount)
-                }
+        viewModel = DivisionViewModel(DivisionRepository())
+        viewModel.getDivision()
+        viewModel.items.observe(viewLifecycleOwner) {
+            it?.let {
+                Log.d("Log404", "Division Response it: ${it.toString()}")
             }
+
+        }
+
     }
 }
