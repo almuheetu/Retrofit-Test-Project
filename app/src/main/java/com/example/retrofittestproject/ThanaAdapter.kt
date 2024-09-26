@@ -3,7 +3,6 @@ package com.example.retrofittestproject
 import android.view.LayoutInflater
 import androidx.recyclerview.widget.RecyclerView
 import android.view.ViewGroup
-
 import com.example.retrofittestproject.databinding.AdapterThanaBinding
 import com.example.retrofittestproject.model.Thana
 
@@ -25,13 +24,10 @@ class ThanaAdapter(
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
         val thana = thanaList[position]
         viewHolder.binding.tvThanaName.text = thana.name
-
-
     }
 
     override fun getItemCount(): Int {
         return thanaList.size
-
     }
 
 }

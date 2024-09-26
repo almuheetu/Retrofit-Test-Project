@@ -3,7 +3,6 @@ package com.example.retrofittestproject
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
-
 import com.example.retrofittestproject.databinding.AdapterDivisionBinding
 import com.example.retrofittestproject.model.DivisionResponseItem
 

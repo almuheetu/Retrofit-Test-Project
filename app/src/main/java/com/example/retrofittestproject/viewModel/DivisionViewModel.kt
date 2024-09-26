@@ -14,18 +14,16 @@ class DivisionViewModel(val divisionRepository: DivisionRepository): ViewModel()
     private val _items: MutableLiveData<DivisionResponse?> by lazy {
         MutableLiveData<DivisionResponse?>()
     }
-
     val items: LiveData<DivisionResponse?> get() = _items
 
     fun getDivision() = viewModelScope.launch {
         try {
             _items.value = divisionRepository.getDivisions()
-            if (_items.value == null) {
-                items.value?.let {
-                }
-            }
+
         } catch (e: IOException) {
             Log.d("catch", "getDivision: $e")
+            _items.value = null
+
         }
     }
 }

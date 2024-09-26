@@ -3,7 +3,6 @@ package com.example.retrofittestproject
 import android.view.LayoutInflater
 import androidx.recyclerview.widget.RecyclerView
 import android.view.ViewGroup
-
 import com.example.retrofittestproject.databinding.AdapterDistrictBinding
 import com.example.retrofittestproject.model.District
 
@@ -39,6 +38,5 @@ class DistrictAdapter(
     interface ItemClickListener {
         fun onItemClick(district: District)
     }
-
 
 }

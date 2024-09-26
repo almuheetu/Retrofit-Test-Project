@@ -1,7 +1,6 @@
 package com.example.retrofittestproject
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -21,8 +20,7 @@ class ThanaFragment : Fragment() {
     private val args: ThanaFragmentArgs by navArgs()
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         binding = FragmentThanaListBinding.inflate(inflater, container, false)
         return binding.root
@@ -38,13 +36,12 @@ class ThanaFragment : Fragment() {
 
         viewModel = DivisionViewModel(DivisionRepository())
         viewModel.getDivision()
-        viewModel.items.observe(viewLifecycleOwner) {
-            it?.let {
-                thanaAdapter = ThanaAdapter(thana)
-                recyclerView.adapter = thanaAdapter
-            }
-        }
+
+        thanaAdapter = ThanaAdapter(thana)
+        recyclerView.adapter = thanaAdapter
 
     }
-
 }
+
+
+
